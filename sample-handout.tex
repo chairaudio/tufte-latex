@@ -1,10 +1,15 @@
-\documentclass{tufte-handout}
+% !TeX TXS-program:bibliography = txs:///biber
+% !TeX TS-program = xelatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_US
+
+\documentclass[nobib]{tufte-handout}
 
 \title{An Example of the Usage of the Tufte-Handout Style\thanks{Inspired by Edward~R. Tufte!}}
 
 \author[The Tufte-LaTeX Developers]{The Tufte-\LaTeX\ Developers}
 
-%\date{28 March 2010} % without \date command, current date is supplied
+%\date{28 March 2022} % without \date command, current date is supplied
 
 %\geometry{showframe} % display margins for debugging page layout
 
@@ -12,7 +17,18 @@
   \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
   \graphicspath{{graphics/}} % set of paths to search for images
 \usepackage{amsmath}  % extended mathematics
-\usepackage{booktabs} % book-quality tables
+
+\usepackage{tabularray}
+  \UseTblrLibrary{booktabs} % book-quality tables
+  \UseTblrLibrary{siunitx}
+  \NewTblrTheme{fancy}{
+	%\SetTblrStyle{firsthead}{font=\bfseries}
+	%\SetTblrStyle{firstfoot}{fg=blue2}
+	%\SetTblrStyle{middlefoot}{\itshape}
+	%\SetTblrStyle{caption-tag}{red2}
+  }
+
+\usepackage{csquotes} % automatic environemt for quotes respecting language and depth
 \usepackage{units}    % non-stacked fractions and better unit spacing
 \usepackage{multicol} % multiple column layout facilities
 \usepackage{lipsum}   % filler text
@@ -28,6 +44,68 @@
 \newcommand{\doccls}[1]{\texttt{#1}}% document class name
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
 \newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\usepackage{hyphenat}
+\usepackage[
+	%natbib=true,
+	style=verbose,
+	autocite=footnote,
+	maxnames=4,
+	%maxcitenames=2
+	backend=biber,
+	%safeinputenc,
+	eprint=false,
+	date=year,
+	uniquename=false,
+	uniquelist=false
+	]{biblatex}
+\renewbibmacro{in:}{}
+\AtEveryBibitem{\clearlist{language}}
+\AtEveryCitekey{\clearlist{language}}
+\AtEveryCitekey{\clearfield{pages}} 
+
+\DeclareSourcemap{
+	\maps{
+		\map{
+			\step[fieldset=month, null]
+			\step[fieldset=address, null]
+			\step[fieldset=location, null]
+			\step[fieldset=doi, null]
+			\step[fieldset=publisher, null]
+			\step[fieldset=url, null]
+			\step[fieldset=isbn, null]
+			\step[fieldset=number, null]
+		}
+	}
+}
+
+
+\addbibresource{sample-handout.bib}
+
+\usepackage{fontspec}
+
+\usepackage{ifxetex,ifluatex}
+\newif\ifxetexorluatex
+	\ifxetex
+		\xetexorluatextrue
+	\else
+	\ifluatex
+		\xetexorluatextrue
+	\else
+	\xetexorluatexfalse
+	\fi
+\fi
+
+\ifxetexorluatex
+	\newcommand{\textls}[2][5]{%
+		\begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+	}
+	\renewcommand{\allcapsspacing}[1]{\textls[15]{#1}}
+	\renewcommand{\smallcapsspacing}[1]{\textls[10]{#1}}
+	\renewcommand{\allcaps}[1]{\textls[15]{\MakeTextUppercase{#1}}}
+	\renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+	\renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+\fi
 
 \begin{document}
 
@@ -199,7 +277,7 @@ the table's data.
 \begin{table}[ht]
   \centering
   \fontfamily{ppl}\selectfont
-  \begin{tabular}{ll}
+  \begin{tblr}{ll}
     \toprule
     Margin & Length \\
     \midrule
@@ -209,7 +287,7 @@ the table's data.
     Textblock/sidenote gutter & \unit[\nicefrac{3}{8}]{inches} \\
     Sidenote width & \unit[2]{inches} \\
     \bottomrule
-  \end{tabular}
+  \end{tblr}
   \caption{Here are the dimensions of the various margins used in the Tufte-handout class.}
   \label{tab:normaltab}
   %\zsavepos{pos:normaltab}
@@ -282,9 +360,7 @@ mentioned in this handout), please see the sample book.
 The website for the Tufte-\LaTeX\ packages is located at
 \url{https://tufte-latex.github.io/tufte-latex}.  On our website, you'll find
 links to our \smallcaps{git} repository, mailing lists, bug tracker, and documentation.
-
-\bibliography{sample-handout}
-\bibliographystyle{plainnat}
+Sadly above homepage seems abandoned so this fork lives at \url{https://github.com/chairaudio/tufte-latex}.
 
 
 
