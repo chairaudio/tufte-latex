@@ -87,9 +87,14 @@
 \addbibresource{sample-handout.bib}
 
 \usepackage{fontspec}
-\setromanfont[Ligatures=TeX]{TeX Gyre Pagella}
-\setsansfont[Ligatures=TeX,Scale=MatchLowercase]{TeX Gyre Heros}
-\setmonofont[Scale=MatchLowercase]{Inconsolata}
+\setmainfont[Mapping=tex-text,Numbers=OldStyle]{Work Sans}[
+BoldFont={* SemiBold},
+]
+\setmonofont{IBM Plex Mono}
+\usepackage{xcolor}
+\definecolor{grey}{rgb}{0.5,0.5,0.5}
+\usepackage{fontawesome}
+\newfontfamily{\FontA}{FontAwesome} 
 
 %\setmainfont[Mapping=tex-text,Numbers=OldStyle]{Bembo}
 %\setsansfont[Mapping=tex-text,Numbers=OldStyle,Scale=MatchLowercase]{Gill Sans}
@@ -371,11 +376,7 @@ mentioned in this handout), please see the sample book.
 The website for the Tufte-\LaTeX\ packages is located at
 \url{https://tufte-latex.github.io/tufte-latex}.  On our website, you'll find
 links to our \smallcaps{git} repository, mailing lists, bug tracker, and documentation.
-<<<<<<< HEAD
 Sadly above homepage seems abandoned so this fork lives at \url{https://github.com/chairaudio/tufte-latex}.
-=======
-Sadly above homepage seems abandoned so this fork lives at \url{https://github.com/chairaudio/tufte-latex}
-
 
 
 
