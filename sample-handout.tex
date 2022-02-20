@@ -1,7 +1,16 @@
+<<<<<<< HEAD
+% !TeX TXS-program:bibliography = txs:///biber
+% !TeX TS-program = xelatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_US
+
+\documentclass[nobib]{tufte-handout}
+=======
 % !TeX encoding = UTF-8
 % !TeX spellcheck = en_US
 
 \documentclass{tufte-handout}
+>>>>>>> master
 
 \title{An Example of the Usage of the Tufte-Handout Style\thanks{Inspired by Edward~R. Tufte!}}
 
@@ -15,6 +24,10 @@
   \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
   \graphicspath{{graphics/}} % set of paths to search for images
 \usepackage{amsmath}  % extended mathematics
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 \usepackage{tabularray}
   \UseTblrLibrary{booktabs} % book-quality tables
   \UseTblrLibrary{siunitx}
@@ -25,7 +38,11 @@
 	%\SetTblrStyle{caption-tag}{red2}
   }
 
+<<<<<<< HEAD
+\usepackage{csquotes} % automatic environemt for quotes respecting language and depth
+=======
 \usepackage{csquotes} 
+>>>>>>> master
 \usepackage{units}    % non-stacked fractions and better unit spacing
 \usepackage{multicol} % multiple column layout facilities
 \usepackage{lipsum}   % filler text
@@ -41,6 +58,75 @@
 \newcommand{\doccls}[1]{\texttt{#1}}% document class name
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
 \newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\usepackage{hyphenat}
+\usepackage[
+	%natbib=true,
+	style=verbose,
+	autocite=footnote,
+	maxnames=4,
+	%maxcitenames=2
+	backend=biber,
+	%safeinputenc,
+	eprint=false,
+	date=year,
+	uniquename=false,
+	uniquelist=false
+	]{biblatex}
+\renewbibmacro{in:}{}
+\AtEveryBibitem{\clearlist{language}}
+\AtEveryCitekey{\clearlist{language}}
+\AtEveryCitekey{\clearfield{pages}} 
+
+\DeclareSourcemap{
+	\maps{
+		\map{
+			\step[fieldset=month, null]
+			\step[fieldset=address, null]
+			\step[fieldset=location, null]
+			\step[fieldset=doi, null]
+			\step[fieldset=publisher, null]
+			\step[fieldset=url, null]
+			\step[fieldset=isbn, null]
+			\step[fieldset=number, null]
+		}
+	}
+}
+
+
+\addbibresource{sample-handout.bib}
+
+\usepackage{fontspec}
+\setromanfont[Ligatures=TeX]{TeX Gyre Pagella}
+\setsansfont[Ligatures=TeX,Scale=MatchLowercase]{TeX Gyre Heros}
+\setmonofont[Scale=MatchLowercase]{Inconsolata}
+
+%\setmainfont[Mapping=tex-text,Numbers=OldStyle]{Bembo}
+%\setsansfont[Mapping=tex-text,Numbers=OldStyle,Scale=MatchLowercase]{Gill Sans}
+%\setmonofont[Mapping=tex-text,Scale=MatchLowercase]{DejaVu Sans Mono}
+
+\usepackage{ifxetex,ifluatex}
+\newif\ifxetexorluatex
+	\ifxetex
+		\xetexorluatextrue
+	\else
+	\ifluatex
+		\xetexorluatextrue
+	\else
+	\xetexorluatexfalse
+	\fi
+\fi
+
+\ifxetexorluatex
+	\newcommand{\textls}[2][5]{%
+		\begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+	}
+	\renewcommand{\allcapsspacing}[1]{\textls[15]{#1}}
+	\renewcommand{\smallcapsspacing}[1]{\textls[10]{#1}}
+	\renewcommand{\allcaps}[1]{\textls[15]{\MakeTextUppercase{#1}}}
+	\renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+	\renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+\fi
 
 \begin{document}
 
@@ -72,7 +158,7 @@ The Tufte-\LaTeX\ classes will emit an error if you try to use
 \linebreak\Verb|\subsubsection| and smaller headings.
 
 % let's start a new thought -- a new section
-\newthought{In his later books},\cite{Tufte2006} Tufte
+\newthought{In his later books}, \cite{Tufte2006} Tufte
 starts each section with a bit of vertical space, a non-indented paragraph,
 and sets the first few words of the sentence in \textsc{small caps}.  To
 accomplish this using this style, use the \Verb|\newthought| command:  
@@ -295,10 +381,14 @@ mentioned in this handout), please see the sample book.
 The website for the Tufte-\LaTeX\ packages is located at
 \url{https://tufte-latex.github.io/tufte-latex}.  On our website, you'll find
 links to our \smallcaps{git} repository, mailing lists, bug tracker, and documentation.
+<<<<<<< HEAD
+Sadly above homepage seems abandoned so this fork lives at \url{https://github.com/chairaudio/tufte-latex}.
+=======
 Sadly above homepage seems abandoned so this fork lives at \url{https://github.com/chairaudio/tufte-latex}
 
 \bibliography{sample-handout}
 \bibliographystyle{plainnat}
+>>>>>>> master
 
 
 
