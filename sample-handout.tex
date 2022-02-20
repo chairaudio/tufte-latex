@@ -83,6 +83,13 @@
 \addbibresource{sample-handout.bib}
 
 \usepackage{fontspec}
+\setromanfont[Ligatures=TeX]{TeX Gyre Pagella}
+\setsansfont[Ligatures=TeX,Scale=MatchLowercase]{TeX Gyre Heros}
+\setmonofont[Scale=MatchLowercase]{Inconsolata}
+
+%\setmainfont[Mapping=tex-text,Numbers=OldStyle]{Bembo}
+%\setsansfont[Mapping=tex-text,Numbers=OldStyle,Scale=MatchLowercase]{Gill Sans}
+%\setmonofont[Mapping=tex-text,Scale=MatchLowercase]{DejaVu Sans Mono}
 
 \usepackage{ifxetex,ifluatex}
 \newif\ifxetexorluatex
@@ -137,7 +144,7 @@ The Tufte-\LaTeX\ classes will emit an error if you try to use
 \linebreak\Verb|\subsubsection| and smaller headings.
 
 % let's start a new thought -- a new section
-\newthought{In his later books},\cite{Tufte2006} Tufte
+\newthought{In his later books}, \cite{Tufte2006} Tufte
 starts each section with a bit of vertical space, a non-indented paragraph,
 and sets the first few words of the sentence in \textsc{small caps}.  To
 accomplish this using this style, use the \Verb|\newthought| command:  
